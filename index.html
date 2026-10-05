@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Banco de Frases — Cassette de Pegamento Lingüístico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <h1>Banco de <em>Frases</em></h1>
+    <span class="tape-icon">📼</span>
+  </header>
+  <p class="subtitle">Pegamento del idioma y vocabulario "gratis": lo que hace que una oración suene nativa, y las palabras cultas que ya casi sabés por su parentesco con el inglés.</p>
+
+  <div class="side-switch">
+    <button class="side-btn active" data-module="frases">🎙️ Frases <small>LADO A · pegamento conversacional</small></button>
+    <button class="side-btn" data-module="cognados">📖 Cognados <small>LADO B · vocabulario "gratis"</small></button>
+  </div>
+
+  <nav class="deck">
+    <button class="active" data-view="browse">Explorar</button>
+    <button data-view="flash">Tarjetas</button>
+    <button data-view="quiz">Quiz</button>
+    <button data-view="mine">Mis frases</button>
+  </nav>
+
+  <!-- BROWSE -->
+  <section class="view active" id="view-browse">
+    <div class="search-row">
+      <input type="search" id="search-input" placeholder="Buscar frase, traducción, o nota...">
+    </div>
+    <div class="cat-row" id="cat-row"></div>
+    <div class="card-list" id="browse-list"></div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section class="view" id="view-flash">
+    <div class="cat-row" id="cat-row-flash"></div>
+    <div class="fc-controls">
+      <span class="fc-counter" id="fc-counter">1 / 1</span>
+      <span id="fc-filter-label">todas las categorías</span>
+      <button class="toggle" id="fc-shuffle" aria-pressed="false" title="Barajar las tarjetas">🔀 aleatorio</button>
+    </div>
+    <div class="flashcard" id="flashcard">
+      <span class="tag" id="fc-tag"></span>
+      <span class="rel-chip" id="fc-rel" style="display:none;"></span>
+      <span class="reg-chip" id="fc-reg" style="display:none;"></span>
+      <span class="flip-hint">toca para voltear</span>
+      <div class="fc-front" id="fc-front"></div>
+      <div class="fc-back" id="fc-back" style="display:none;"></div>
+    </div>
+    <div class="transport">
+      <button class="tbtn" id="fc-prev">◀ anterior</button>
+      <button class="tbtn learning" id="fc-learning">aún aprendiendo</button>
+      <button class="tbtn known" id="fc-known">ya la sé</button>
+      <button class="tbtn" id="fc-next">siguiente ▶</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="view" id="view-quiz">
+    <div class="cat-row" id="cat-row-quiz"></div>
+    <div class="quiz-toolbar">
+      <span class="quiz-mode-note">Sin repetir hasta agotar el mazo</span>
+      <button class="toggle" id="quiz-weak" aria-pressed="false" title="Salen más las que fallaste o nunca viste">🎯 priorizar fallos</button>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-prompt" id="quiz-prompt-text">Completa la frase:</div>
+      <div class="quiz-sentence" id="quiz-sentence"></div>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-feedback" id="quiz-feedback">
+        <div class="translation-line" id="quiz-translation"></div>
+        <div id="quiz-example" style="font-style:italic; margin-top:6px;"></div>
+      </div>
+      <button class="tbtn quiz-next" id="quiz-next">siguiente ▶</button>
+    </div>
+    <div class="quiz-stats" id="quiz-stats"></div>
+  </section>
+
+  <!-- MINE -->
+  <section class="view" id="view-mine">
+    <div class="add-form">
+      <div>
+        <label for="m-es">En español (como lo escuchaste/leíste)</label>
+        <input type="text" id="m-es" placeholder="ej. dizque iba a llamar y nunca llamó">
+      </div>
+      <div>
+        <label for="m-en">Qué significa / traducción libre</label>
+        <input type="text" id="m-en" placeholder="ej. supposedly he was going to call and never did">
+      </div>
+      <div class="row2">
+        <div>
+          <label for="m-cat">Categoría</label>
+          <select id="m-cat"></select>
+        </div>
+        <div>
+          <label for="m-source">Fuente (canción, serie, libro, quién lo dijo)</label>
+          <input type="text" id="m-source" placeholder="ej. Cien años de soledad, cap. 4">
+        </div>
+      </div>
+      <div>
+        <label for="m-note">Nota (opcional)</label>
+        <input type="text" id="m-note" placeholder="ej. subjuntivo, registro literario">
+      </div>
+      <button class="submit" id="m-submit">Guardar</button>
+    </div>
+    <div class="card-list" id="mine-list"></div>
+  </section>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
