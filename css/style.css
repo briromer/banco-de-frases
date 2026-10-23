@@ -226,3 +226,39 @@ button.toggle[aria-pressed="true"] { border-color: var(--teal-deep); background:
   .side-switch { flex-direction: column; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Sync (cloud button + dialog) */
+.masthead-tools { display: flex; align-items: center; gap: 12px; }
+.sync-btn {
+  position: relative; appearance: none; border: 1.5px solid var(--line); background: var(--paper-2);
+  color: var(--ink); font-size: 18px; line-height: 1; width: 40px; height: 40px; border-radius: 2px; cursor: pointer;
+}
+.sync-btn:hover { border-color: var(--ink); }
+.sync-dot { position: absolute; top: 4px; right: 4px; width: 9px; height: 9px; border-radius: 50%; background: var(--ink-soft); opacity: 0.5; }
+.sync-btn[data-state="ok"] .sync-dot { background: var(--teal); opacity: 1; }
+.sync-btn[data-state="syncing"] .sync-dot { background: var(--mustard); opacity: 1; }
+.sync-btn[data-state="error"] .sync-dot { background: var(--rust); opacity: 1; }
+.sync-dialog {
+  width: calc(100% - 32px); max-width: 440px; padding: 22px 20px; border: 2px solid var(--ink); border-radius: 4px;
+  background: var(--paper); color: var(--ink); box-shadow: 5px 5px 0 var(--shadow);
+  font-family: "Work Sans", sans-serif; font-size: 14px; line-height: 1.5; overflow-x: hidden;
+}
+.sync-dialog::backdrop { background: rgba(43,36,32,0.55); }
+.sync-dialog h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 22px; margin: 0 0 10px; }
+.sync-dialog p { margin: 0 0 12px; }
+.sync-dialog a { color: var(--teal-deep); font-weight: 600; }
+.sync-dialog code { background: var(--paper-2); padding: 1px 5px; border-radius: 2px; }
+.sync-dialog label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
+.sync-dialog input[type="password"] {
+  width: 100%; font-family: "Work Sans", sans-serif; font-size: 15px; padding: 10px 12px;
+  border: 1.5px solid var(--line); background: var(--paper-2); color: var(--ink); border-radius: 2px;
+}
+.sync-dialog input[type="password"]:focus { outline: 2px solid var(--teal-deep); outline-offset: 1px; }
+.sync-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.sync-actions .tbtn { flex: 1 1 140px; }
+.sync-small { font-size: 12px; color: var(--ink-soft); }
+.sync-status { font-weight: 600; }
+.sync-status[data-state="ok"] { color: var(--teal-deep); }
+.sync-status[data-state="syncing"] { color: var(--mustard); }
+.sync-status[data-state="error"] { color: var(--rust); }
+#sync-off[hidden], #sync-on[hidden] { display: none; }

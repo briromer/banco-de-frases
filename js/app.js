@@ -37,6 +37,7 @@
   }
   function saveJSON(key, val){
     try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){ /* ignore */ }
+    if (window.BancoSync) BancoSync.notifyChange();
   }
   function escapeHTML(s){
     var d = document.createElement("div");

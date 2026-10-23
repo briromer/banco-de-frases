@@ -30,6 +30,7 @@ js/data.js         — ALL CONTENT lives here. Two independent arrays:
                        CATS_COGNADOS / DATA_COGNADOS
                      Add a new phrase or cognate by adding one object to the
                      relevant DATA_* array. No other file needs to change.
+js/sync.js         — optional Gist sync (loaded before app.js)
 js/app.js          — the shared engine: module switching, category filters,
                      search, flashcards, quiz, and the "Mis frases" add-form.
                      Reads MODULES config at the top to know how each module
@@ -39,7 +40,7 @@ js/app.js          — the shared engine: module switching, category filters,
 ## How progress is stored
 
 Everything is `localStorage`, scoped to whatever browser/device you're using
-it in — there's no backend, no sync. Two kinds of data per module:
+it in — there's no backend. (Optional cross-device sync is described below.) Kinds of data per module:
 
 - **Progress** (`banco_progress_v1` / `cognados_progress_v1`): per-item
   status (`new` / `learning` / `known`), set from the flashcard buttons or
@@ -54,6 +55,31 @@ it in — there's no backend, no sync. Two kinds of data per module:
   🎯 priorizar fallos (quiz pulls missed/unseen items more often) toggles,
   remembered per side. With priorizar fallos off, the quiz deals from a
   shuffled deck with no repeats until the deck runs out.
+
+### Sync between devices
+
+Optional. The ☁ button in the header syncs progress, "Mis frases", quiz
+history and prefs through a **private GitHub Gist** in your own account
+(file `banco-de-frases-sync.json`). Code lives in `js/sync.js`.
+
+Setup:
+
+1. Click ☁ and follow the link to create a *classic* personal access token
+   with only the `gist` scope.
+2. Paste it and press "Conectar". The app finds the Gist (or creates it).
+3. Repeat on each device with the same token.
+
+Behavior:
+
+- Every change is pushed ~2 s after it happens; the app pulls when it opens
+  and when you come back to the tab (at most every 30 s).
+- **Last write wins** on the whole snapshot: if you edit on two devices while
+  offline, whichever device saved last overwrites the other. Newer remote data
+  replaces local data and the page reloads once.
+- First connect on a device adopts the existing Gist if there is one.
+- The token and sync metadata live only in this browser's `localStorage`
+  (`banco_sync_token_v1`, `banco_sync_meta_v1`) and are never uploaded.
+  "Desconectar" removes them locally without touching the Gist or your progress.
 
 Keyboard: in Quiz, `1`–`4` answer and `Enter` goes to the next question; in
 Tarjetas, `Space` flips and `←`/`→` move.

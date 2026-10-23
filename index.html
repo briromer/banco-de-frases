@@ -12,7 +12,10 @@
 <div class="wrap">
   <header class="masthead">
     <h1>Banco de <em>Frases</em></h1>
-    <span class="tape-icon">📼</span>
+    <span class="masthead-tools">
+      <button type="button" id="sync-btn" class="sync-btn" data-state="off" aria-label="Sincronización entre dispositivos: sin conectar" title="sin conectar" aria-haspopup="dialog">☁<span class="sync-dot" aria-hidden="true"></span></button>
+      <span class="tape-icon">📼</span>
+    </span>
   </header>
   <p class="subtitle">Pegamento del idioma y vocabulario "gratis": lo que hace que una oración suene nativa, y las palabras cultas que ya casi sabés por su parentesco con el inglés.</p>
 
@@ -112,7 +115,32 @@
   </section>
 </div>
 
+<dialog id="sync-dialog" class="sync-dialog" aria-labelledby="sync-title">
+  <h2 id="sync-title">Sincronizar entre dispositivos</h2>
+  <div id="sync-off">
+    <p>Tu progreso, tus frases y el historial del quiz se guardan en un Gist privado de tu cuenta de GitHub. Usá el mismo token en cada dispositivo y todo queda al día.</p>
+    <p><a href="https://github.com/settings/tokens/new?scopes=gist&amp;description=Banco%20de%20Frases%20sync" target="_blank" rel="noopener">Creá un token clásico</a> con un solo permiso: <code>gist</code>. Copialo y pegalo acá.</p>
+    <p class="sync-small">Ojo: si ya hay un Gist de otro dispositivo, al conectar se reemplaza el progreso de este navegador por el del Gist. Conectá primero el dispositivo con más progreso.</p>
+    <label for="sync-token">Token de GitHub</label>
+    <input type="password" id="sync-token" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ghp_…">
+    <div class="sync-actions">
+      <button type="button" class="tbtn" id="sync-connect">Conectar</button>
+    </div>
+  </div>
+  <div id="sync-on" hidden>
+    <p class="sync-status" id="sync-status" data-state="off" role="status"></p>
+    <div class="sync-actions">
+      <button type="button" class="tbtn" id="sync-now">Sincronizar ahora</button>
+      <button type="button" class="tbtn" id="sync-disconnect">Desconectar en este dispositivo</button>
+    </div>
+    <p class="sync-small">Desconectar solo borra el token de este navegador: no toca tu Gist ni tu progreso local.</p>
+  </div>
+  <p class="sync-small">El token se queda solo en este navegador.</p>
+  <div class="sync-actions"><button type="button" class="tbtn" id="sync-close">Cerrar</button></div>
+</dialog>
+
 <script src="js/data.js"></script>
+<script src="js/sync.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
